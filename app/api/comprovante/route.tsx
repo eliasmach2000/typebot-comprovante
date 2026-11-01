@@ -1,12 +1,10 @@
 import { ImageResponse } from '@vercel/og';
-import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
-export async function GET(request: NextRequest) {
+export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
-  // Captura os dados passados pelo Typebot na URL
   const banco = searchParams.get('banco') || 'Não informado';
   const chave = searchParams.get('chave') || 'Não informada';
   const cpf = searchParams.get('cpf') || 'Não informado';
