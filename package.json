@@ -1,7 +1,14 @@
 {
   "name": "typebot-comprovante",
   "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "next build"
+  },
   "dependencies": {
-    "@vercel/og": "^0.6.0"
+    "@vercel/og": "^0.6.0",
+    "next": "latest",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
