@@ -32,7 +32,7 @@ export async function GET(request: Request) {
           position: 'relative',
           fontFamily: 'sans-serif',
           color: '#111827',
-          fontSize: '16px',
+          fontSize: '14px',
           fontWeight: 'bold',
           lineHeight: 1,
         }}
@@ -53,9 +53,9 @@ export async function GET(request: Request) {
           style={{
             position: 'absolute',
             top: '296px',
-            left: '214px',
+            left: '170px',
             display: 'flex',
-            fontWeight: 'bold',
+            whiteSpace: 'nowrap',
           }}
         >
           {cpf}
@@ -65,10 +65,10 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '332px',
-            left: '226px',
+            top: '319px',
+            left: '185px',
             display: 'flex',
-            fontWeight: 'bold',
+            whiteSpace: 'nowrap',
           }}
         >
           {nome}
@@ -78,10 +78,10 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '368px',
-            left: '274px',
+            top: '342px',
+            left: '232px',
             display: 'flex',
-            fontWeight: 'bold',
+            whiteSpace: 'nowrap',
           }}
         >
           {nascimento}
@@ -91,10 +91,10 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '403px',
-            left: '220px',
+            top: '365px',
+            left: '178px',
             display: 'flex',
-            fontWeight: 'bold',
+            whiteSpace: 'nowrap',
           }}
         >
           {sexo}
@@ -104,25 +104,23 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '438px',
-            left: '244px',
-            maxWidth: '520px',
+            top: '388px',
+            left: '200px',
             display: 'flex',
-            flexWrap: 'wrap',
-            fontWeight: 'bold',
+            whiteSpace: 'nowrap',
           }}
         >
           {filiacao}
         </div>
 
-        {/* Nome após "Atestamos que" */}
+        {/* Nome sobre a linha após "Atestamos que" */}
         <div
           style={{
             position: 'absolute',
-            top: '491px',
-            left: '292px',
+            top: '447px',
+            left: '248px',
             display: 'flex',
-            fontWeight: 'bold',
+            whiteSpace: 'nowrap',
           }}
         >
           {nome}
