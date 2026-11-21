@@ -5,12 +5,10 @@ export const runtime = 'edge';
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
-  // Carrega a imagem exata salva na pasta public do GitHub
   const bgImage = await fetch(
     new URL('../../../public/certificado.jpg', import.meta.url)
   ).then((res) => res.arrayBuffer());
 
-  // Captura as variáveis enviadas pelo Typebot na URL
   const cpf = searchParams.get('CPF') || searchParams.get('cpf') || '';
   const nascimento =
     searchParams.get('DATA') ||
@@ -21,8 +19,6 @@ export async function GET(request: Request) {
   const mae = searchParams.get('PAIS') || searchParams.get('mae') || '';
   const pai = searchParams.get('Pais2') || searchParams.get('pai') || '';
   const sexo = searchParams.get('SEXO') || searchParams.get('sexo') || '';
-
-  const filiacao = [mae, pai].filter(Boolean).join(' e ');
 
   return new ImageResponse(
     (
@@ -35,9 +31,9 @@ export async function GET(request: Request) {
           fontFamily: 'sans-serif',
           color: '#111827',
           fontSize: '15px',
+          lineHeight: 1,
         }}
       >
-        {/* Imagem de fundo idêntica ao modelo */}
         <img
           src={bgImage as any}
           style={{
@@ -53,9 +49,10 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '291px',
-            left: '212px',
+            top: '272px',
+            left: '165px',
             display: 'flex',
+            fontWeight: 'bold',
           }}
         >
           {cpf}
@@ -65,9 +62,10 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '327px',
-            left: '228px',
+            top: '304px',
+            left: '179px',
             display: 'flex',
+            fontWeight: 'bold',
           }}
         >
           {nome}
@@ -77,9 +75,10 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '364px',
-            left: '270px',
+            top: '336px',
+            left: '223px',
             display: 'flex',
+            fontWeight: 'bold',
           }}
         >
           {nascimento}
@@ -89,26 +88,42 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '400px',
-            left: '220px',
+            top: '368px',
+            left: '172px',
             display: 'flex',
+            fontWeight: 'bold',
           }}
         >
           {sexo}
         </div>
 
-        {/* Filiação */}
+        {/* Filiação (Mãe e Pai em negrito, com "e" normal) */}
         <div
           style={{
             position: 'absolute',
-            top: '437px',
-            left: '242px',
-            maxWidth: '520px',
+            top: '400px',
+            left: '195px',
+            maxWidth: '560px',
             display: 'flex',
             flexWrap: 'wrap',
           }}
         >
-          {filiacao}
+          {mae && <span style={{ fontWeight: 'bold' }}>{mae}</span>}
+          {mae && pai && <span style={{ margin: '0 5px' }}>e</span>}
+          {pai && <span style={{ fontWeight: 'bold' }}>{pai}</span>}
+        </div>
+
+        {/* Nome após "Atestamos que" */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '464px',
+            left: '239px',
+            display: 'flex',
+            fontWeight: 'bold',
+          }}
+        >
+          {nome}
         </div>
       </div>
     ),
