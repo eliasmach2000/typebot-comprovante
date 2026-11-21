@@ -128,7 +128,7 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '472px',
+            top: '462px',
             left: '246px',
             display: 'flex',
             alignItems: 'center',
