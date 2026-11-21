@@ -69,7 +69,7 @@ export async function GET(request: Request) {
           style={{
             position: 'absolute',
             top: '342px',
-            left: '181px',
+            left: '183px',
             height: '24px',
             display: 'flex',
             alignItems: 'center',
