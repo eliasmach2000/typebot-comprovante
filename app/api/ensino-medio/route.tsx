@@ -68,8 +68,8 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '340px',
-            left: '178px',
+            top: '342px',
+            left: '181px',
             height: '24px',
             display: 'flex',
             alignItems: 'center',
@@ -113,7 +113,7 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '412px',
+            top: '410px',
             left: '194px',
             height: '24px',
             display: 'flex',
