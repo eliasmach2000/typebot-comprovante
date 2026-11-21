@@ -20,6 +20,8 @@ export async function GET(request: Request) {
   const pai = searchParams.get('Pais2') || searchParams.get('pai') || '';
   const sexo = searchParams.get('SEXO') || searchParams.get('sexo') || '';
 
+  const filiacao = [mae, pai].filter(Boolean).join(' e ');
+
   return new ImageResponse(
     (
       <div
@@ -30,7 +32,8 @@ export async function GET(request: Request) {
           position: 'relative',
           fontFamily: 'sans-serif',
           color: '#111827',
-          fontSize: '15px',
+          fontSize: '16px',
+          fontWeight: 'bold',
           lineHeight: 1,
         }}
       >
@@ -49,8 +52,8 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '272px',
-            left: '165px',
+            top: '296px',
+            left: '214px',
             display: 'flex',
             fontWeight: 'bold',
           }}
@@ -62,8 +65,8 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '304px',
-            left: '179px',
+            top: '332px',
+            left: '226px',
             display: 'flex',
             fontWeight: 'bold',
           }}
@@ -75,8 +78,8 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '336px',
-            left: '223px',
+            top: '368px',
+            left: '274px',
             display: 'flex',
             fontWeight: 'bold',
           }}
@@ -88,8 +91,8 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '368px',
-            left: '172px',
+            top: '403px',
+            left: '220px',
             display: 'flex',
             fontWeight: 'bold',
           }}
@@ -97,28 +100,27 @@ export async function GET(request: Request) {
           {sexo}
         </div>
 
-        {/* Filiação (Mãe e Pai em negrito, com "e" normal) */}
+        {/* Filiação */}
         <div
           style={{
             position: 'absolute',
-            top: '400px',
-            left: '195px',
-            maxWidth: '560px',
+            top: '438px',
+            left: '244px',
+            maxWidth: '520px',
             display: 'flex',
             flexWrap: 'wrap',
+            fontWeight: 'bold',
           }}
         >
-          {mae && <span style={{ fontWeight: 'bold' }}>{mae}</span>}
-          {mae && pai && <span style={{ margin: '0 5px' }}>e</span>}
-          {pai && <span style={{ fontWeight: 'bold' }}>{pai}</span>}
+          {filiacao}
         </div>
 
         {/* Nome após "Atestamos que" */}
         <div
           style={{
             position: 'absolute',
-            top: '464px',
-            left: '239px',
+            top: '491px',
+            left: '292px',
             display: 'flex',
             fontWeight: 'bold',
           }}
