@@ -34,6 +34,7 @@ export async function GET(request: Request) {
           color: '#111827',
           fontSize: '13px',
           fontWeight: 'bold',
+          textShadow: '0.4px 0 0 #111827',
           lineHeight: 1,
         }}
       >
@@ -52,7 +53,7 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '291px',
+            top: '316px',
             left: '166px',
             height: '24px',
             display: 'flex',
@@ -67,7 +68,7 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '315px',
+            top: '340px',
             left: '178px',
             height: '24px',
             display: 'flex',
@@ -82,8 +83,8 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '339px',
-            left: '221px',
+            top: '364px',
+            left: '224px',
             height: '24px',
             display: 'flex',
             alignItems: 'center',
@@ -97,8 +98,8 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '363px',
-            left: '171px',
+            top: '388px',
+            left: '172px',
             height: '24px',
             display: 'flex',
             alignItems: 'center',
@@ -112,8 +113,8 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '387px',
-            left: '191px',
+            top: '412px',
+            left: '194px',
             height: '24px',
             display: 'flex',
             alignItems: 'center',
@@ -127,8 +128,8 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '451px',
-            left: '244px',
+            top: '472px',
+            left: '246px',
             display: 'flex',
             alignItems: 'center',
             fontSize: '13.5px',
