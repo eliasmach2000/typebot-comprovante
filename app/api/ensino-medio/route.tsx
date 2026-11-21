@@ -32,7 +32,7 @@ export async function GET(request: Request) {
           position: 'relative',
           fontFamily: 'sans-serif',
           color: '#111827',
-          fontSize: '14px',
+          fontSize: '13px',
           fontWeight: 'bold',
           lineHeight: 1,
         }}
@@ -48,65 +48,75 @@ export async function GET(request: Request) {
           }}
         />
 
-        {/* CPF */}
+        {/* Linha 1: CPF */}
         <div
           style={{
             position: 'absolute',
-            top: '296px',
-            left: '170px',
+            top: '291px',
+            left: '166px',
+            height: '24px',
             display: 'flex',
+            alignItems: 'center',
             whiteSpace: 'nowrap',
           }}
         >
           {cpf}
         </div>
 
-        {/* Nome */}
+        {/* Linha 2: Nome */}
         <div
           style={{
             position: 'absolute',
-            top: '319px',
-            left: '185px',
+            top: '315px',
+            left: '178px',
+            height: '24px',
             display: 'flex',
+            alignItems: 'center',
             whiteSpace: 'nowrap',
           }}
         >
           {nome}
         </div>
 
-        {/* Nascimento */}
+        {/* Linha 3: Nascimento */}
         <div
           style={{
             position: 'absolute',
-            top: '342px',
-            left: '232px',
+            top: '339px',
+            left: '221px',
+            height: '24px',
             display: 'flex',
+            alignItems: 'center',
             whiteSpace: 'nowrap',
           }}
         >
           {nascimento}
         </div>
 
-        {/* Sexo */}
+        {/* Linha 4: Sexo */}
         <div
           style={{
             position: 'absolute',
-            top: '365px',
-            left: '178px',
+            top: '363px',
+            left: '171px',
+            height: '24px',
             display: 'flex',
+            alignItems: 'center',
             whiteSpace: 'nowrap',
           }}
         >
           {sexo}
         </div>
 
-        {/* Filiação */}
+        {/* Linha 5: Filiação */}
         <div
           style={{
             position: 'absolute',
-            top: '388px',
-            left: '200px',
+            top: '387px',
+            left: '191px',
+            height: '24px',
             display: 'flex',
+            alignItems: 'center',
             whiteSpace: 'nowrap',
           }}
         >
@@ -117,9 +127,11 @@ export async function GET(request: Request) {
         <div
           style={{
             position: 'absolute',
-            top: '447px',
-            left: '248px',
+            top: '451px',
+            left: '244px',
             display: 'flex',
+            alignItems: 'center',
+            fontSize: '13.5px',
             whiteSpace: 'nowrap',
           }}
         >
