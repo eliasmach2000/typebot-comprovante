@@ -2,46 +2,15 @@ import { ImageResponse } from '@vercel/og';
 
 export const runtime = 'edge';
 
-function BrasaoSVG({ size = 90, opacity = 1 }: { size?: number; opacity?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 200 200"
-      style={{ opacity }}
-    >
-      <polygon
-        points="100,8 118,42 156,28 152,66 188,76 164,106 188,136 152,146 156,184 118,170 100,196 82,170 44,184 48,146 12,136 36,106 12,76 48,66 44,28 82,42"
-        fill="#eab308"
-        stroke="#ca8a04"
-        strokeWidth="2"
-      />
-      <rect x="95" y="18" width="10" height="164" rx="3" fill="#94a3b8" />
-      <rect x="82" y="152" width="36" height="8" rx="3" fill="#b91c1c" />
-      <circle cx="100" cy="100" r="46" fill="#1e3a8a" stroke="#eab308" strokeWidth="5" />
-      <circle cx="100" cy="84" r="3" fill="#ffffff" />
-      <circle cx="100" cy="116" r="3" fill="#ffffff" />
-      <circle cx="86" cy="100" r="3" fill="#ffffff" />
-      <circle cx="114" cy="100" r="3" fill="#ffffff" />
-      <circle cx="106" cy="107" r="2.2" fill="#ffffff" />
-      <path d="M52,62 Q30,100 55,144" fill="none" stroke="#15803d" strokeWidth="8" strokeLinecap="round" />
-      <path d="M148,62 Q170,100 145,144" fill="none" stroke="#15803d" strokeWidth="8" strokeLinecap="round" />
-      <path d="M42,146 Q100,168 158,146 L152,162 Q100,182 48,162 Z" fill="#1d4ed8" stroke="#eab308" strokeWidth="2" />
-    </svg>
-  );
-}
-
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
-  const cpf = searchParams.get('CPF') || searchParams.get('cpf') || 'Não informado';
-  const nascimento = searchParams.get('DATA') || searchParams.get('data') || searchParams.get('nascimento') || 'Não informada';
-  const nome = searchParams.get('NOME') || searchParams.get('nome') || 'Não informado';
-  const mae = searchParams.get('PAIS') || searchParams.get('mae') || '';
-  const pai = searchParams.get('Pais2') || searchParams.get('pai') || '';
-  const sexo = searchParams.get('SEXO') || searchParams.get('sexo') || 'Não informado';
-
-  const filiacao = [mae, pai].filter(Boolean).join(' e ') || 'Não informada';
+  const banco = searchParams.get('banco') || searchParams.get('instituicao') || 'Não informado';
+  const chave = searchParams.get('chave') || searchParams.get('chavepix') || 'Não informada';
+  const cpf = searchParams.get('cpf') || 'Não informado';
+  const data = searchParams.get('data') || searchParams.get('dataehora') || 'Não informada';
+  const nome = searchParams.get('nome') || 'Não informado';
+  const valor = searchParams.get('valor') || '2480,00';
 
   return new ImageResponse(
     (
@@ -50,195 +19,241 @@ export async function GET(request: Request) {
           height: '100%',
           width: '100%',
           display: 'flex',
-          flexDirection: 'row',
+          flexDirection: 'column',
           backgroundColor: '#ffffff',
           fontFamily: 'sans-serif',
-          position: 'relative',
+          padding: '30px',
+          boxSizing: 'border-box',
         }}
       >
-        {/* Faixa Verde Esquerda */}
         <div
           style={{
-            width: '72px',
-            height: '100%',
-            backgroundColor: '#4a6323',
             display: 'flex',
-          }}
-        />
-
-        {/* Faixa Amarela Esquerda */}
-        <div
-          style={{
-            width: '44px',
-            height: '100%',
-            backgroundColor: '#f5b800',
-            display: 'flex',
-          }}
-        />
-
-        {/* Área Principal do Documento */}
-        <div
-          style={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            padding: '28px 44px 28px 52px',
-            position: 'relative',
             justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '15px',
           }}
         >
-          {/* Marca d'água de fundo */}
-          <div
-            style={{
-              position: 'absolute',
-              right: '10px',
-              bottom: '20px',
-              display: 'flex',
-            }}
-          >
-            <BrasaoSVG size={430} opacity={0.14} />
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div
+                style={{
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  border: '3px solid #0b1e3d',
+                  marginRight: '8px',
+                }}
+              />
+              <span style={{ fontSize: '32px', fontWeight: 'bold', color: '#0b1e3d' }}>
+                btg
+              </span>
+              <span style={{ fontSize: '32px', color: '#0b1e3d', marginLeft: '4px' }}>
+                pactual
+              </span>
+            </div>
+            <span style={{ fontSize: '12px', color: '#555555', marginTop: '4px' }}>
+              Instituição Financeira Autorizada CNPJ: 30.306.294/0001-45
+            </span>
           </div>
 
-          {/* Cabeçalho */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+            <span style={{ fontSize: '15px', fontWeight: 'bold', color: '#0b1e3d' }}>
+              COMPROVANTE DE TRANSFERÊNCIA
+            </span>
+            <span style={{ fontSize: '11px', color: '#666666', marginTop: '2px' }}>
+              Conforme a Medida Provisória nº 1,394/2026
+            </span>
+          </div>
+        </div>
+
+        <div
+          style={{
+            backgroundColor: '#0b1e3d',
+            color: '#ffffff',
+            textAlign: 'center',
+            padding: '10px 0',
+            fontWeight: 'bold',
+            fontSize: '18px',
+            letterSpacing: '0.5px',
+            marginBottom: '15px',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          COMPROVANTE DE TRANSFERÊNCIA BANCÁRIA
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '15px' }}>
+          <span
+            style={{
+              fontSize: '18px',
+              fontWeight: 'bold',
+              color: '#0b1e3d',
+              textAlign: 'center',
+              marginBottom: '8px',
+            }}
+          >
+            1. DADOS DO RECEBEDOR
+          </span>
+
           <div
             style={{
               display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginBottom: '24px',
+              flexDirection: 'column',
+              backgroundColor: '#f9fafb',
+              border: '1px solid #e5e7eb',
+              borderRadius: '4px',
             }}
           >
-            <div style={{ display: 'flex', marginRight: '28px' }}>
-              <BrasaoSVG size={105} opacity={1} />
+            <div
+              style={{
+                display: 'flex',
+                padding: '8px 12px',
+                borderBottom: '1px solid #e5e7eb',
+                fontSize: '14px',
+              }}
+            >
+              <strong style={{ color: '#111827', width: '200px' }}>NOME DO RECEBEDOR:</strong>
+              <span style={{ color: '#111827', fontWeight: 'bold' }}>{nome}</span>
             </div>
 
             <div
               style={{
                 display: 'flex',
-                flexDirection: 'column',
+                padding: '8px 12px',
+                borderBottom: '1px solid #e5e7eb',
+                fontSize: '14px',
+              }}
+            >
+              <strong style={{ color: '#111827', width: '200px' }}>CPF:</strong>
+              <span style={{ color: '#111827', fontWeight: 'bold' }}>{cpf}</span>
+            </div>
+
+            <div
+              style={{
+                display: 'flex',
+                padding: '8px 12px',
+                borderBottom: '1px solid #e5e7eb',
+                fontSize: '14px',
+              }}
+            >
+              <strong style={{ color: '#111827', width: '200px' }}>INSTITUIÇÃO:</strong>
+              <span style={{ color: '#111827', fontWeight: 'bold' }}>{banco}</span>
+            </div>
+
+            <div style={{ display: 'flex', padding: '8px 12px', fontSize: '14px' }}>
+              <strong style={{ color: '#111827', width: '200px' }}>CHAVE PIX:</strong>
+              <span style={{ color: '#111827', fontWeight: 'bold' }}>{chave}</span>
+            </div>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '15px' }}>
+          <span
+            style={{
+              fontSize: '18px',
+              fontWeight: 'bold',
+              color: '#0b1e3d',
+              textAlign: 'center',
+              marginBottom: '8px',
+            }}
+          >
+            2. DETALHES DA TRANSAÇÃO
+          </span>
+
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              backgroundColor: '#f9fafb',
+              border: '1px solid #e5e7eb',
+              borderRadius: '4px',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                padding: '8px 12px',
+                borderBottom: '1px solid #e5e7eb',
+                fontSize: '14px',
                 alignItems: 'center',
               }}
             >
-              <span
-                style={{
-                  fontSize: '19px',
-                  fontWeight: 'bold',
-                  color: '#111827',
-                }}
-              >
-                REPUBLICA FEDERATIVA DO BRASIL
-              </span>
-              <span
-                style={{
-                  fontSize: '19px',
-                  fontWeight: 'bold',
-                  color: '#111827',
-                  marginTop: '6px',
-                }}
-              >
-                Ministério da Educação - MEC
+              <strong style={{ color: '#111827', width: '200px' }}>VALOR DA TRANSFERÊNCIA:</strong>
+              <span style={{ color: '#15803d', fontWeight: 'bold', fontSize: '18px' }}>
+                R$ {valor}
               </span>
             </div>
-          </div>
 
-          {/* Título */}
-          <div
-            style={{
-              display: 'flex',
-              fontSize: '20px',
-              color: '#111827',
-              marginBottom: '22px',
-            }}
-          >
-            COMPROVAÇÃO FORMAL DE TÉRMINO DO ENSINO DE NÍVEL MÉDIO
-          </div>
-
-          {/* Subtítulo */}
-          <div
-            style={{
-              display: 'flex',
-              fontSize: '17px',
-              color: '#111827',
-              marginBottom: '20px',
-            }}
-          >
-            INFORMAÇÕES DO REQUERENTE
-          </div>
-
-          {/* Dados do Requerente */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              marginBottom: '24px',
-              fontSize: '16px',
-              color: '#111827',
-            }}
-          >
-            <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '14px' }}>
-              <strong style={{ marginRight: '8px' }}>CPF:</strong>
-              <span>{cpf}</span>
+            <div
+              style={{
+                display: 'flex',
+                padding: '8px 12px',
+                borderBottom: '1px solid #e5e7eb',
+                fontSize: '14px',
+              }}
+            >
+              <strong style={{ color: '#111827', width: '200px' }}>DATA E HORA:</strong>
+              <span style={{ color: '#111827', fontWeight: 'bold' }}>{data}</span>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '14px' }}>
-              <strong style={{ marginRight: '8px' }}>Nome:</strong>
-              <span>{nome}</span>
+            <div
+              style={{
+                display: 'flex',
+                padding: '8px 12px',
+                borderBottom: '1px solid #e5e7eb',
+                fontSize: '14px',
+              }}
+            >
+              <strong style={{ color: '#111827', width: '200px' }}>TIPO DE TRANSAÇÃO:</strong>
+              <span style={{ color: '#374151' }}>PIX - Transferência Instantânea</span>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '14px' }}>
-              <strong style={{ marginRight: '8px' }}>Nascimento:</strong>
-              <span>{nascimento}</span>
+            <div
+              style={{
+                display: 'flex',
+                padding: '8px 12px',
+                borderBottom: '1px solid #e5e7eb',
+                fontSize: '14px',
+              }}
+            >
+              <strong style={{ color: '#111827', width: '200px' }}>ID DA TRANSAÇÃO / E2E:</strong>
+              <span style={{ color: '#374151' }}>E00000000202610251410XyZ891234</span>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '14px' }}>
-              <strong style={{ marginRight: '8px' }}>Sexo:</strong>
-              <span>{sexo}</span>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-              <strong style={{ marginRight: '8px' }}>Filiação:</strong>
-              <span>{filiacao}</span>
+            <div style={{ display: 'flex', padding: '8px 12px', fontSize: '14px', alignItems: 'center' }}>
+              <strong style={{ color: '#111827', width: '200px' }}>SITUAÇÃO:</strong>
+              <span style={{ color: '#15803d', fontWeight: 'bold' }}>PROCESSANDO TRANSAÇÃO</span>
             </div>
           </div>
+        </div>
 
-          {/* Texto de Atestado */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              fontSize: '15px',
-              color: '#1f2937',
-              lineHeight: '1.5',
-              marginBottom: '22px',
-            }}
-          >
-            <span style={{ marginBottom: '8px' }}>Atestamos que</span>
-            <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', marginBottom: '4px' }}>
-              <strong style={{ color: '#111827', marginRight: '5px' }}>Concluiu o Ensino Médio,</strong>
-              <span>cursado em regime de blocos de disciplinas semestrais</span>
-            </div>
-            <span>
-              em observância ao disposto na Lei nº 9.394/96, em instituição devidamente credenciada pelo MEC – Ministério da educação e em conformidade com as diretrizes do Sistema Estadual de Ensino.
-            </span>
-          </div>
-
-          {/* Rodapé */}
-          <div
-            style={{
-              display: 'flex',
-              fontSize: '13px',
-              color: '#374151',
-              lineHeight: '1.4',
-            }}
-          >
-            *Este arquivo não substitui o documento original. Para obtê-lo, solicite o documento oficial via PDF junto a instituição*
-          </div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            backgroundColor: '#f3f4f6',
+            padding: '10px 12px',
+            borderRadius: '4px',
+            marginTop: 'auto',
+          }}
+        >
+          <span style={{ fontSize: '11px', fontWeight: 'bold', color: '#374151' }}>
+            AUTENTICAÇÃO BANCÁRIA
+          </span>
+          <span style={{ fontSize: '11px', color: '#111827', fontWeight: 'bold', marginTop: '2px' }}>
+            Código de Autenticação: B71A90E4-3C28-4F81-9102-D84920193E81
+          </span>
+          <span style={{ fontSize: '10px', color: '#6b7280', marginTop: '2px' }}>
+            Esta transação foi processada com segurança pelo Banco BTG Pactual. Os dados acima referem-se a uma transferência via PIX realizada entre contas. Em caso de dúvidas, utilize o código de autenticação nos canais de atendimento oficiais.
+          </span>
         </div>
       </div>
     ),
     {
-      width: 800,
-      height: 710,
+      width: 750,
+      height: 700,
     }
   );
 }
