@@ -2,233 +2,119 @@ import { ImageResponse } from '@vercel/og';
 
 export const runtime = 'edge';
 
-function BrasaoSVG({ size = 90, opacity = 1 }: { size?: number; opacity?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 200 200"
-      style={{ opacity }}
-    >
-      <polygon
-        points="100,8 118,42 156,28 152,66 188,76 164,106 188,136 152,146 156,184 118,170 100,196 82,170 44,184 48,146 12,136 36,106 12,76 48,66 44,28 82,42"
-        fill="#eab308"
-        stroke="#ca8a04"
-        strokeWidth="2"
-      />
-      <rect x="95" y="18" width="10" height="164" rx="3" fill="#94a3b8" />
-      <rect x="82" y="152" width="36" height="8" rx="3" fill="#b91c1c" />
-      <circle cx="100" cy="100" r="46" fill="#1e3a8a" stroke="#eab308" strokeWidth="5" />
-      <circle cx="100" cy="84" r="3" fill="#ffffff" />
-      <circle cx="100" cy="116" r="3" fill="#ffffff" />
-      <circle cx="86" cy="100" r="3" fill="#ffffff" />
-      <circle cx="114" cy="100" r="3" fill="#ffffff" />
-      <circle cx="106" cy="107" r="2.2" fill="#ffffff" />
-      <path d="M52,62 Q30,100 55,144" fill="none" stroke="#15803d" strokeWidth="8" strokeLinecap="round" />
-      <path d="M148,62 Q170,100 145,144" fill="none" stroke="#15803d" strokeWidth="8" strokeLinecap="round" />
-      <path d="M42,146 Q100,168 158,146 L152,162 Q100,182 48,162 Z" fill="#1d4ed8" stroke="#eab308" strokeWidth="2" />
-    </svg>
-  );
-}
-
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
-  const cpf = searchParams.get('CPF') || searchParams.get('cpf') || 'Não informado';
-  const nascimento = searchParams.get('DATA') || searchParams.get('data') || searchParams.get('nascimento') || 'Não informada';
-  const nome = searchParams.get('NOME') || searchParams.get('nome') || 'Não informado';
+  // Carrega a imagem exata salva na pasta public do GitHub
+  const bgImage = await fetch(
+    new URL('../../../public/certificado.jpg', import.meta.url)
+  ).then((res) => res.arrayBuffer());
+
+  // Captura as variáveis enviadas pelo Typebot na URL
+  const cpf = searchParams.get('CPF') || searchParams.get('cpf') || '';
+  const nascimento =
+    searchParams.get('DATA') ||
+    searchParams.get('data') ||
+    searchParams.get('nascimento') ||
+    '';
+  const nome = searchParams.get('NOME') || searchParams.get('nome') || '';
   const mae = searchParams.get('PAIS') || searchParams.get('mae') || '';
   const pai = searchParams.get('Pais2') || searchParams.get('pai') || '';
-  const sexo = searchParams.get('SEXO') || searchParams.get('sexo') || 'Não informado';
+  const sexo = searchParams.get('SEXO') || searchParams.get('sexo') || '';
 
-  const filiacao = [mae, pai].filter(Boolean).join(' e ') || 'Não informada';
+  const filiacao = [mae, pai].filter(Boolean).join(' e ');
 
   return new ImageResponse(
     (
       <div
         style={{
-          height: '100%',
-          width: '100%',
+          width: '800px',
+          height: '704px',
           display: 'flex',
-          flexDirection: 'row',
-          backgroundColor: '#ffffff',
-          fontFamily: 'sans-serif',
           position: 'relative',
+          fontFamily: 'sans-serif',
+          color: '#111827',
+          fontSize: '15px',
         }}
       >
-        <div
+        {/* Imagem de fundo idêntica ao modelo */}
+        <img
+          src={bgImage as any}
           style={{
-            width: '72px',
-            height: '100%',
-            backgroundColor: '#4a6323',
-            display: 'flex',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '800px',
+            height: '704px',
           }}
         />
 
+        {/* CPF */}
         <div
           style={{
-            width: '44px',
-            height: '100%',
-            backgroundColor: '#f5b800',
+            position: 'absolute',
+            top: '291px',
+            left: '212px',
             display: 'flex',
-          }}
-        />
-
-        <div
-          style={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            padding: '28px 44px 28px 52px',
-            position: 'relative',
-            justifyContent: 'space-between',
           }}
         >
-          <div
-            style={{
-              position: 'absolute',
-              right: '10px',
-              bottom: '20px',
-              display: 'flex',
-            }}
-          >
-            <BrasaoSVG size={430} opacity={0.14} />
-          </div>
+          {cpf}
+        </div>
 
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginBottom: '24px',
-            }}
-          >
-            <div style={{ display: 'flex', marginRight: '28px' }}>
-              <BrasaoSVG size={105} opacity={1} />
-            </div>
+        {/* Nome */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '327px',
+            left: '228px',
+            display: 'flex',
+          }}
+        >
+          {nome}
+        </div>
 
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
-              <span
-                style={{
-                  fontSize: '19px',
-                  fontWeight: 'bold',
-                  color: '#111827',
-                }}
-              >
-                REPUBLICA FEDERATIVA DO BRASIL
-              </span>
-              <span
-                style={{
-                  fontSize: '19px',
-                  fontWeight: 'bold',
-                  color: '#111827',
-                  marginTop: '6px',
-                }}
-              >
-                Ministério da Educação - MEC
-              </span>
-            </div>
-          </div>
+        {/* Nascimento */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '364px',
+            left: '270px',
+            display: 'flex',
+          }}
+        >
+          {nascimento}
+        </div>
 
-          <div
-            style={{
-              display: 'flex',
-              fontSize: '20px',
-              color: '#111827',
-              marginBottom: '22px',
-            }}
-          >
-            COMPROVAÇÃO FORMAL DE TÉRMINO DO ENSINO DE NÍVEL MÉDIO
-          </div>
+        {/* Sexo */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '400px',
+            left: '220px',
+            display: 'flex',
+          }}
+        >
+          {sexo}
+        </div>
 
-          <div
-            style={{
-              display: 'flex',
-              fontSize: '17px',
-              color: '#111827',
-              marginBottom: '20px',
-            }}
-          >
-            INFORMAÇÕES DO REQUERENTE
-          </div>
-
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              marginBottom: '24px',
-              fontSize: '16px',
-              color: '#111827',
-            }}
-          >
-            <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '14px' }}>
-              <strong style={{ marginRight: '8px' }}>CPF:</strong>
-              <span>{cpf}</span>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '14px' }}>
-              <strong style={{ marginRight: '8px' }}>Nome:</strong>
-              <span>{nome}</span>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '14px' }}>
-              <strong style={{ marginRight: '8px' }}>Nascimento:</strong>
-              <span>{nascimento}</span>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '14px' }}>
-              <strong style={{ marginRight: '8px' }}>Sexo:</strong>
-              <span>{sexo}</span>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-              <strong style={{ marginRight: '8px' }}>Filiação:</strong>
-              <span>{filiacao}</span>
-            </div>
-          </div>
-
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              fontSize: '15px',
-              color: '#1f2937',
-              lineHeight: '1.5',
-              marginBottom: '22px',
-            }}
-          >
-            <span style={{ marginBottom: '8px' }}>Atestamos que</span>
-            <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', marginBottom: '4px' }}>
-              <strong style={{ color: '#111827', marginRight: '5px' }}>Concluiu o Ensino Médio,</strong>
-              <span>cursado em regime de blocos de disciplinas semestrais</span>
-            </div>
-            <span>
-              em observância ao disposto na Lei nº 9.394/96, em instituição devidamente credenciada pelo MEC – Ministério da educação e em conformidade com as diretrizes do Sistema Estadual de Ensino.
-            </span>
-          </div>
-
-          <div
-            style={{
-              display: 'flex',
-              fontSize: '13px',
-              color: '#374151',
-              lineHeight: '1.4',
-            }}
-          >
-            *Este arquivo não substitui o documento original. Para obtê-lo, solicite o documento oficial via PDF junto a instituição*
-          </div>
+        {/* Filiação */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '437px',
+            left: '242px',
+            maxWidth: '520px',
+            display: 'flex',
+            flexWrap: 'wrap',
+          }}
+        >
+          {filiacao}
         </div>
       </div>
     ),
     {
       width: 800,
-      height: 710,
+      height: 704,
     }
   );
 }
